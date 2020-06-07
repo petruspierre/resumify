@@ -67,6 +67,46 @@ const styles = StyleSheet.create({
     fontFamily: commonStyles.fontFamily.primary.regular,
     color: commonStyles.colors.black,
     marginBottom: 14,
+  },
+  mainAditionalContainer: {
+    flex: 1,
+    marginTop: 32,
+  },
+  inputTitle: {
+    fontSize: 18,
+    fontFamily: commonStyles.fontFamily.primary.regular,
+    color: commonStyles.colors.black,
+    marginBottom: 8,
+  },
+  textArea: {
+    flex: 1,
+    width: '100%',
+    padding: 11,
+    paddingLeft: 16,
+    borderWidth: 1,
+    borderColor: commonStyles.colors.gray,
+    borderRadius: 8,
+    textAlignVertical: 'top',
+    justifyContent: "flex-start"
+  },
+  footerAditional: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: '100%'
+  },
+  addButton: {
+    width: 50,
+    height: 50,
+    backgroundColor: commonStyles.colors.primary,
+    marginRight: 14,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 8,
+    marginTop: 14,
+  },
+  finishButton: {
+    width: commonStyles.metrics.screenWidth - 40 - 50 - 14,
   }
 });
 

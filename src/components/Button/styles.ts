@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
   button: {
     flexDirection: "row",
     backgroundColor: commonStyles.colors.primary,
+    height: 50,
     padding: 15,
     width: '100%',
     borderRadius: 8,
@@ -16,7 +17,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontFamily: commonStyles.fontFamily.primary.regular,
     color: "#fff",
-    lineHeight: 22
+    lineHeight: 25,
   },
   buttonArrow: {
 

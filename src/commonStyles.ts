@@ -1,3 +1,4 @@
+import { Dimensions } from 'react-native';
 import Constants from 'expo-constants';
 
 const styles = {
@@ -19,6 +20,7 @@ const styles = {
   },
   metrics: {
     statusBarHeight: Constants.statusBarHeight,
+    screenWidth: Dimensions.get('window').width,
   }
 };
 
