@@ -12,7 +12,12 @@ const styles = StyleSheet.create({
   backArrow: {
     position: "absolute",
     top: 8,
-    left: 16,
+    left: 20,
+  },
+  eye: {
+    position: "absolute",
+    top: 8,
+    right: 20,
   },
   questionContainer: {
     flex: 1,
@@ -71,23 +76,6 @@ const styles = StyleSheet.create({
   mainAditionalContainer: {
     flex: 1,
     marginTop: 32,
-  },
-  inputTitle: {
-    fontSize: 18,
-    fontFamily: commonStyles.fontFamily.primary.regular,
-    color: commonStyles.colors.black,
-    marginBottom: 8,
-  },
-  textArea: {
-    flex: 1,
-    width: '100%',
-    padding: 11,
-    paddingLeft: 16,
-    borderWidth: 1,
-    borderColor: commonStyles.colors.gray,
-    borderRadius: 8,
-    textAlignVertical: 'top',
-    justifyContent: "flex-start"
   },
   footerAditional: {
     flexDirection: "row",

@@ -9,7 +9,9 @@ import { RectButton } from 'react-native-gesture-handler';
 import styles from './styles';
 import api from '../../services/api';
 
+import Topic from '../../components/Topic';
 import Button from '../../components/Button';
+import Paragraph from '../../components/Paragraph';
 
 interface Body {
   type: string,
@@ -47,25 +49,47 @@ const Create: React.FC = () => {
     if (step === 'discipline'){
       setStep('title');
     } else if (step === 'title') {
+      if(!title) {
+        Alert.alert('ooops...', 'preencha o campo de título');
+        return;
+      }
       setStep('aditional');
     }
   }
 
   function handleAddBody(){
 
-    if(!title) {
-      Alert.alert('ooops...', 'preencha todos os campos');
-    }
+    if(type === 'topic'){
+      if(!bodyTitle) {
+        Alert.alert('ooops...', 'preencha o campo de título');
+        return;
+      }
+  
+      const data = {
+        type: type as string,
+        title: bodyTitle,
+        content: bodyAditionalInfo
+      }
+  
+      setBody([...body, data]);
+      setBodyTitle('');
+      setBodyAditionalInfo([]);
+    } else if(type === 'paragraph') {
+      if(!bodyAditionalInfoText) {
+        Alert.alert('ooops...', 'preencha o campo de parágrafo');
+        return;
+      }
 
-    const data = {
-      type: type as string,
-      title: bodyTitle,
-      content: bodyAditionalInfo
-    }
+      const data = {
+        type: type as string,
+        title: '',
+        content: [bodyAditionalInfoText]
+      }
 
-    setBody([...body, data]);
-    setBodyTitle('');
-    setBodyAditionalInfo([]);
+      setBody([...body, data]);
+      setBodyTitle('');
+      setBodyAditionalInfoText('');
+    }
 
   }
 
@@ -147,8 +171,11 @@ const Create: React.FC = () => {
         <TouchableOpacity style={styles.backArrow} onPress={handleNavigateBack}>
           <Feather name="arrow-left" size={24} color="#000"/>
         </TouchableOpacity>
+        <TouchableOpacity style={styles.eye} onPress={handleNavigateBack}>
+          <Feather name="eye" size={24} color="#000"/>
+        </TouchableOpacity>
       
-        <KeyboardAwareScrollView style={styles.scrollContainer} contentContainerStyle={{flex: 1}}>
+        <KeyboardAwareScrollView nestedScrollEnabled style={styles.scrollContainer} contentContainerStyle={{flex: 1}}>
 
           <View style={styles.headerAditional}>
             <Text style={styles.headerAditionalText}>adicionar novo(a):</Text>
@@ -159,36 +186,32 @@ const Create: React.FC = () => {
                 onValueChange={(item:React.ReactText) => setType(item)}
                 selectedValue={type}>
                 <Picker.Item label="Tópico" value="topic"/>
+                <Picker.Item label="Parágrafo" value="paragraph"/>
               </Picker>
             </View>
           </View>
 
           <View style={styles.mainAditionalContainer}>
-            <Text style={styles.inputTitle}>título do tópico</Text>
-            <TextInput 
-              style={styles.input}
-              value={bodyTitle}
-              onChangeText={setBodyTitle}
-            />
 
-            <Text style={styles.inputTitle}>informação extra</Text>
-            <View style={{ flex: 1, width: '100%' }}>
-              <TextInput 
-                style={styles.textArea}
-                placeholder="opcional"
-                value={bodyAditionalInfoText}
-                onChangeText={setBodyAditionalInfoText}
-                onSubmitEditing={handleAddAditionalInfo}
-                returnKeyType="send"
-                multiline
+            {type === 'topic' && 
+              <Topic 
+                bodyTitle={bodyTitle} 
+                bodyAditionalInfoText={bodyAditionalInfoText}
+                bodyAditionalInfo={bodyAditionalInfo}
+                setBodyTitle={setBodyTitle}
+                setBodyAditionalInfoText={setBodyAditionalInfoText}
+                handleAddAditionalInfo={handleAddAditionalInfo}
               />
-              <TouchableOpacity style={{ position: "absolute", top: 8, right: 8 }} onPress={handleAddAditionalInfo}>
-                <Feather name="plus" size={24} color="#07070A"/>
-              </TouchableOpacity>
-              {bodyAditionalInfo.map((item, index) => (
-                <Text key={index} style={{ color: '#333', fontSize: 16 }}>{item}</Text>
-              ))}
-            </View>
+            }
+
+            {type === 'paragraph' &&
+              <Paragraph
+                bodyAditionalInfoText={bodyAditionalInfoText}
+                setBodyAditionalInfoText={setBodyAditionalInfoText}
+                handleAddBody={handleAddBody}
+              />
+            }
+              
           </View>
 
           <View style={styles.footerAditional}>
