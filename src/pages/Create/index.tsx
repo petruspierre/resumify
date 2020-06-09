@@ -25,7 +25,7 @@ const Create: React.FC = () => {
   const [discipline, setDiscipline] = useState<React.ReactText>('Biologia');
 
   const [body, setBody] = useState<Body[]>([]);
-  const [type, setType] = useState<React.ReactText>('topic');
+  const [type, setType] = useState<React.ReactText>('paragraph');
   const [bodyTitle, setBodyTitle] = useState('');
   const [bodyAditionalInfoText, setBodyAditionalInfoText] = useState('');
   const [bodyAditionalInfo, setBodyAditionalInfo] = useState<string[]>([]);
@@ -43,6 +43,10 @@ const Create: React.FC = () => {
     } else if (step === 'aditional') {
       setStep('title');
     }
+  }
+
+  function handleNavigateToPreview(){
+    navigation.navigate('Preview', { body });
   }
 
   function handleNextStep(){
@@ -114,6 +118,12 @@ const Create: React.FC = () => {
 
       const url = (response.data.finalPath);
 
+      setBody([]);
+      setTitle('');
+      setBodyTitle('');
+      setBodyAditionalInfoText('');
+      navigation.navigate('Home');
+
       Linking.openURL(url);
 
     } catch(err) {
@@ -171,7 +181,7 @@ const Create: React.FC = () => {
         <TouchableOpacity style={styles.backArrow} onPress={handleNavigateBack}>
           <Feather name="arrow-left" size={24} color="#000"/>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.eye} onPress={handleNavigateBack}>
+        <TouchableOpacity style={styles.eye} onPress={handleNavigateToPreview}>
           <Feather name="eye" size={24} color="#000"/>
         </TouchableOpacity>
       

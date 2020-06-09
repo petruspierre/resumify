@@ -23,7 +23,6 @@ const Home: React.FC = () => {
 
       <View style={styles.buttons}>
         <Button title="criar novo resumo" icon="chevron-right" onPress={handleNavigateToCreate}/>
-        <Button title="meus resumos" icon="archive" onPress={() => {}}/>
       </View>
     </View>
   )
