@@ -50,5 +50,14 @@ Run the project
 ```
 $ expo start
 ```
+# How to Contribute
+
+- Fork this repository;
+- Create a branch with your feature: ```git checkout -b my-feature```;
+- Commit your changes: ```git commit -m 'My new feature'```;
+- Push to your branch: ```git push origin my-feature```.
+
+> Or you can just open a Issue :)
+
 ## Authors
 - [Petrus Pierre](https://github.com/petruspierre/) [Mobile and API]
