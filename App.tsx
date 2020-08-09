@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StatusBar } from 'react-native';
-import { AppLoading } from 'expo';
 import { Dosis_500Medium, Dosis_700Bold } from '@expo-google-fonts/dosis';
 import {
   Quicksand_300Light,
@@ -8,6 +7,7 @@ import {
   Quicksand_400Regular,
   useFonts,
 } from '@expo-google-fonts/quicksand';
+import * as SplashScreen from 'expo-splash-screen';
 
 import Routes from './src/routes';
 
@@ -20,10 +20,19 @@ export default function App() {
     Dosis_700Bold,
   });
 
+  useEffect(() => {
+    async function keepSplash() {
+      await SplashScreen.hideAsync();
+    }
+
+    keepSplash();
+  });
+
   if (!fontsLoaded) {
-    return <AppLoading />;
+    return null;
   }
 
+  SplashScreen.hideAsync();
   return (
     <>
       <StatusBar
