@@ -224,16 +224,15 @@ const Create: React.FC = () => {
               
           </View>
 
-          <View style={styles.footerAditional}>
-            <RectButton style={styles.addButton} onPress={handleAddBody}>
-              <Feather name="plus" size={24} color="#fff" />
-            </RectButton>
-            <View style={styles.finishButton}>
-              <Button title="finalizar" icon="chevron-right" onPress={handleFinish}/>
-            </View>
-          </View>
-
         </KeyboardAwareScrollView>
+        <View style={styles.footerAditional}>
+          <RectButton style={styles.addButton} onPress={handleAddBody}>
+            <Feather name="plus" size={24} color="#fff" />
+          </RectButton>
+          <View style={styles.finishButton}>
+            <Button title="finalizar" icon="chevron-right" onPress={handleFinish}/>
+          </View>
+        </View>
       </View>
     );
   }
