@@ -9,11 +9,15 @@ interface Props {
   handleAddBody: () => void;
 }
 
-const Paragraph: React.FC<Props> = ({ bodyAditionalInfoText, setBodyAditionalInfoText, handleAddBody }) => {
+const Paragraph: React.FC<Props> = ({
+  bodyAditionalInfoText,
+  setBodyAditionalInfoText,
+  handleAddBody,
+}) => {
   return (
     <>
       <Text style={styles.inputTitle}>conteúdo do parágrado</Text>
-      <TextInput 
+      <TextInput
         style={styles.textArea}
         placeholder="opcional"
         value={bodyAditionalInfoText}
@@ -24,6 +28,6 @@ const Paragraph: React.FC<Props> = ({ bodyAditionalInfoText, setBodyAditionalInf
       />
     </>
   );
-}
+};
 
 export default Paragraph;

@@ -12,18 +12,19 @@ const src: React.FC = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        headerMode='none'
+        headerMode="none"
         screenOptions={{
           cardStyle: {
             backgroundColor: '#F0F0F5',
-          }
-        }}>
-          <Stack.Screen name='Home' component={Home}/>
-          <Stack.Screen name='Create' component={Create}/>
-          <Stack.Screen name='Preview' component={Preview}/>
+          },
+        }}
+      >
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Create" component={Create} />
+        <Stack.Screen name="Preview" component={Preview} />
       </Stack.Navigator>
-    </NavigationContainer>  
-  )
-}
+    </NavigationContainer>
+  );
+};
 
 export default src;

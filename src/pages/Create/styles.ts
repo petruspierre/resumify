@@ -7,28 +7,28 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: commonStyles.metrics.statusBarHeight,
     padding: 20,
-    alignItems: "center"
+    alignItems: 'center',
   },
   backArrow: {
-    position: "absolute",
+    position: 'absolute',
     top: 8,
     left: 20,
   },
   eye: {
-    position: "absolute",
+    position: 'absolute',
     top: 8,
     right: 20,
   },
   questionContainer: {
     flex: 1,
     width: 250,
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
   },
   questionText: {
     width: '100%',
     fontSize: 36,
     fontFamily: commonStyles.fontFamily.primary.regular,
-    textAlign: "center"
+    textAlign: 'center',
   },
   nextContainer: {
     flex: 1.5,
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
 
   scrollContainer: {
     flex: 1,
-    width: '100%'
+    width: '100%',
   },
   headerAditional: {
     width: '100%',
@@ -78,24 +78,24 @@ const styles = StyleSheet.create({
     marginTop: 32,
   },
   footerAditional: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    width: '100%'
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
   },
   addButton: {
     width: 50,
     height: 50,
     backgroundColor: commonStyles.colors.primary,
     marginRight: 14,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 8,
     marginTop: 14,
   },
   finishButton: {
     width: commonStyles.metrics.screenWidth - 40 - 50 - 14,
-  }
+  },
 });
 
 export default styles;

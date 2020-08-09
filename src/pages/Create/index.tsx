@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput, Alert, Linking, FlatList } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  Alert,
+  Linking,
+} from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { Picker } from '@react-native-community/picker';
 import { useNavigation } from '@react-navigation/native';
@@ -14,13 +21,12 @@ import Button from '../../components/Button';
 import Paragraph from '../../components/Paragraph';
 
 interface Body {
-  type: string,
-  title: string,
-  content: string[]
+  type: string;
+  title: string;
+  content: string[];
 }
 
 const Create: React.FC = () => {
-
   const [title, setTitle] = useState('');
   const [discipline, setDiscipline] = useState<React.ReactText>('Biologia');
 
@@ -34,7 +40,7 @@ const Create: React.FC = () => {
 
   const navigation = useNavigation();
 
-  function handleNavigateBack(){
+  function handleNavigateBack() {
     if (step === 'discipline') {
       navigation.goBack();
     } else if (step === 'title') {
@@ -45,15 +51,15 @@ const Create: React.FC = () => {
     }
   }
 
-  function handleNavigateToPreview(){
+  function handleNavigateToPreview() {
     navigation.navigate('Preview', { body });
   }
 
-  function handleNextStep(){
-    if (step === 'discipline'){
+  function handleNextStep() {
+    if (step === 'discipline') {
       setStep('title');
     } else if (step === 'title') {
-      if(!title) {
+      if (!title) {
         Alert.alert('ooops...', 'preencha o campo de título');
         return;
       }
@@ -61,25 +67,24 @@ const Create: React.FC = () => {
     }
   }
 
-  function handleAddBody(){
-
-    if(type === 'topic'){
-      if(!bodyTitle) {
+  function handleAddBody() {
+    if (type === 'topic') {
+      if (!bodyTitle) {
         Alert.alert('ooops...', 'preencha o campo de título');
         return;
       }
-  
+
       const data = {
         type: type as string,
         title: bodyTitle,
-        content: bodyAditionalInfo
-      }
-  
+        content: bodyAditionalInfo,
+      };
+
       setBody([...body, data]);
       setBodyTitle('');
       setBodyAditionalInfo([]);
-    } else if(type === 'paragraph') {
-      if(!bodyAditionalInfoText) {
+    } else if (type === 'paragraph') {
+      if (!bodyAditionalInfoText) {
         Alert.alert('ooops...', 'preencha o campo de parágrafo');
         return;
       }
@@ -87,18 +92,17 @@ const Create: React.FC = () => {
       const data = {
         type: type as string,
         title: '',
-        content: [bodyAditionalInfoText]
-      }
+        content: [bodyAditionalInfoText],
+      };
 
       setBody([...body, data]);
       setBodyTitle('');
       setBodyAditionalInfoText('');
     }
-
   }
 
-  function handleAddAditionalInfo(){
-    if(!bodyAditionalInfoText) {
+  function handleAddAditionalInfo() {
+    if (!bodyAditionalInfoText) {
       Alert.alert('ooops...', 'preencha o campo antes de adicionar!');
     }
 
@@ -106,17 +110,17 @@ const Create: React.FC = () => {
     setBodyAditionalInfoText('');
   }
 
-  async function handleFinish(){
+  async function handleFinish() {
     try {
       const data = {
         discipline,
         title,
-        body
-      }
+        body,
+      };
 
       const response = await api.post('/pdf', data);
 
-      const url = (response.data.finalPath);
+      const url = response.data.finalPath;
 
       setBody([]);
       setTitle('');
@@ -125,117 +129,125 @@ const Create: React.FC = () => {
       navigation.navigate('Home');
 
       Linking.openURL(url);
-
-    } catch(err) {
+    } catch (err) {
       Alert.alert('ooops...', 'ocorreu um erro, tente novamente');
     }
   }
 
-  if(step === 'discipline' || step === 'title') {
+  if (step === 'discipline' || step === 'title') {
     return (
       <View style={styles.container}>
-  
         <TouchableOpacity style={styles.backArrow} onPress={handleNavigateBack}>
-          <Feather name="arrow-left" size={24} color="#000"/>
+          <Feather name="arrow-left" size={24} color="#000" />
         </TouchableOpacity>
-        
+
         <View style={styles.questionContainer}>
           <Text style={styles.questionText}>
             {step === 'discipline'
-            ? 'qual a matéria do resumo?'
-            : 'qual o título do resumo?'}
-            </Text>
+              ? 'qual a matéria do resumo?'
+              : 'qual o título do resumo?'}
+          </Text>
         </View>
-  
-        <View style={styles.nextContainer}>
-          {step === 'discipline'
-          ? (<View style={styles.pickerContainer}>
-            <Picker 
-              style={styles.picker} 
-              itemStyle={styles.pickerText} 
-              onValueChange={(item:React.ReactText) => setDiscipline(item)}
-              selectedValue={discipline}>
-              <Picker.Item label="Biologia" value="Biologia"/>
-              <Picker.Item label="Física" value="Física"/>
-              <Picker.Item label="História" value="História"/>
-              <Picker.Item label="Matemática" value="Matemática"/>
-              <Picker.Item label="Português" value="Português"/>
-              <Picker.Item label="Química" value="Química"/>
-            </Picker>
-          </View>)
-          : <TextInput
-            style={styles.input}
-            placeholder="ex.: segunda guerra mundial"
-            value={title}
-            onChangeText={setTitle}
-          />}
-          
-          <Button title="próximo" icon="chevron-right" onPress={handleNextStep}/>
-        </View>
-  
-      </View>
-    );
-  } else {
-    return (
-      <View style={styles.container}>
-        <TouchableOpacity style={styles.backArrow} onPress={handleNavigateBack}>
-          <Feather name="arrow-left" size={24} color="#000"/>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.eye} onPress={handleNavigateToPreview}>
-          <Feather name="eye" size={24} color="#000"/>
-        </TouchableOpacity>
-      
-        <KeyboardAwareScrollView nestedScrollEnabled style={styles.scrollContainer} contentContainerStyle={{flex: 1}}>
 
-          <View style={styles.headerAditional}>
-            <Text style={styles.headerAditionalText}>adicionar novo(a):</Text>
+        <View style={styles.nextContainer}>
+          {step === 'discipline' ? (
             <View style={styles.pickerContainer}>
-              <Picker 
-                style={styles.picker} 
-                itemStyle={styles.pickerText} 
-                onValueChange={(item:React.ReactText) => setType(item)}
-                selectedValue={type}>
-                <Picker.Item label="Tópico" value="topic"/>
-                <Picker.Item label="Parágrafo" value="paragraph"/>
+              <Picker
+                style={styles.picker}
+                itemStyle={styles.pickerText}
+                onValueChange={(item: React.ReactText) => setDiscipline(item)}
+                selectedValue={discipline}
+              >
+                <Picker.Item label="Biologia" value="Biologia" />
+                <Picker.Item label="Física" value="Física" />
+                <Picker.Item label="História" value="História" />
+                <Picker.Item label="Matemática" value="Matemática" />
+                <Picker.Item label="Português" value="Português" />
+                <Picker.Item label="Química" value="Química" />
               </Picker>
             </View>
-          </View>
+          ) : (
+            <TextInput
+              style={styles.input}
+              placeholder="ex.: segunda guerra mundial"
+              value={title}
+              onChangeText={setTitle}
+            />
+          )}
 
-          <View style={styles.mainAditionalContainer}>
-
-            {type === 'topic' && 
-              <Topic 
-                bodyTitle={bodyTitle} 
-                bodyAditionalInfoText={bodyAditionalInfoText}
-                bodyAditionalInfo={bodyAditionalInfo}
-                setBodyTitle={setBodyTitle}
-                setBodyAditionalInfoText={setBodyAditionalInfoText}
-                handleAddAditionalInfo={handleAddAditionalInfo}
-              />
-            }
-
-            {type === 'paragraph' &&
-              <Paragraph
-                bodyAditionalInfoText={bodyAditionalInfoText}
-                setBodyAditionalInfoText={setBodyAditionalInfoText}
-                handleAddBody={handleAddBody}
-              />
-            }
-              
-          </View>
-
-        </KeyboardAwareScrollView>
-        <View style={styles.footerAditional}>
-          <RectButton style={styles.addButton} onPress={handleAddBody}>
-            <Feather name="plus" size={24} color="#fff" />
-          </RectButton>
-          <View style={styles.finishButton}>
-            <Button title="finalizar" icon="chevron-right" onPress={handleFinish}/>
-          </View>
+          <Button
+            title="próximo"
+            icon="chevron-right"
+            onPress={handleNextStep}
+          />
         </View>
       </View>
     );
   }
-}
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.backArrow} onPress={handleNavigateBack}>
+        <Feather name="arrow-left" size={24} color="#000" />
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.eye} onPress={handleNavigateToPreview}>
+        <Feather name="eye" size={24} color="#000" />
+      </TouchableOpacity>
+
+      <KeyboardAwareScrollView
+        nestedScrollEnabled
+        style={styles.scrollContainer}
+        contentContainerStyle={{ flex: 1 }}
+      >
+        <View style={styles.headerAditional}>
+          <Text style={styles.headerAditionalText}>adicionar novo(a):</Text>
+          <View style={styles.pickerContainer}>
+            <Picker
+              style={styles.picker}
+              itemStyle={styles.pickerText}
+              onValueChange={(item: React.ReactText) => setType(item)}
+              selectedValue={type}
+            >
+              <Picker.Item label="Tópico" value="topic" />
+              <Picker.Item label="Parágrafo" value="paragraph" />
+            </Picker>
+          </View>
+        </View>
+
+        <View style={styles.mainAditionalContainer}>
+          {type === 'topic' && (
+            <Topic
+              bodyTitle={bodyTitle}
+              bodyAditionalInfoText={bodyAditionalInfoText}
+              bodyAditionalInfo={bodyAditionalInfo}
+              setBodyTitle={setBodyTitle}
+              setBodyAditionalInfoText={setBodyAditionalInfoText}
+              handleAddAditionalInfo={handleAddAditionalInfo}
+            />
+          )}
+
+          {type === 'paragraph' && (
+            <Paragraph
+              bodyAditionalInfoText={bodyAditionalInfoText}
+              setBodyAditionalInfoText={setBodyAditionalInfoText}
+              handleAddBody={handleAddBody}
+            />
+          )}
+        </View>
+      </KeyboardAwareScrollView>
+      <View style={styles.footerAditional}>
+        <RectButton style={styles.addButton} onPress={handleAddBody}>
+          <Feather name="plus" size={24} color="#fff" />
+        </RectButton>
+        <View style={styles.finishButton}>
+          <Button
+            title="finalizar"
+            icon="chevron-right"
+            onPress={handleFinish}
+          />
+        </View>
+      </View>
+    </View>
+  );
+};
 
 export default Create;

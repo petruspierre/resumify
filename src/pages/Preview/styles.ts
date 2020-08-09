@@ -6,10 +6,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: commonStyles.metrics.statusBarHeight,
-    alignItems: "center"
+    alignItems: 'center',
   },
   backArrow: {
-    position: "absolute",
+    position: 'absolute',
     top: 8,
     left: 20,
     paddingRight: 5,
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 16,
     elevation: 4,
-    justifyContent: "center"
+    justifyContent: 'center',
   },
   type: {
     color: commonStyles.colors.gray,
@@ -32,13 +32,13 @@ const styles = StyleSheet.create({
   title: {
     color: commonStyles.colors.black,
     fontSize: 18,
-    fontFamily: commonStyles.fontFamily.primary.medium
-  }, 
+    fontFamily: commonStyles.fontFamily.primary.medium,
+  },
   content: {
     color: commonStyles.colors.black,
     fontSize: 16,
-    fontFamily: commonStyles.fontFamily.primary.regular
-  }
+    fontFamily: commonStyles.fontFamily.primary.regular,
+  },
 });
 
 export default styles;

@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     borderColor: commonStyles.colors.gray,
     borderRadius: 8,
     textAlignVertical: 'top',
-    justifyContent: "flex-start"
+    justifyContent: 'flex-start',
   },
 });
 

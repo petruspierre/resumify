@@ -5,24 +5,24 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    alignItems: "center",
+    alignItems: 'center',
     paddingVertical: 60,
   },
   header: {
     flex: 1,
-    justifyContent: "center"
+    justifyContent: 'center',
   },
   slogan: {
     fontSize: 18,
     fontFamily: commonStyles.fontFamily.primary.regular,
     color: commonStyles.colors.black,
     width: 250,
-    textAlign: "center"
+    textAlign: 'center',
   },
   buttons: {
     width: 250,
     flex: 1,
-    justifyContent: "center"
+    justifyContent: 'center',
   },
 });
 
