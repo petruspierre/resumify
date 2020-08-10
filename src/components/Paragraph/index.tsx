@@ -19,7 +19,6 @@ const Paragraph: React.FC<Props> = ({
       <Text style={styles.inputTitle}>conteúdo do parágrado</Text>
       <TextInput
         style={styles.textArea}
-        placeholder="opcional"
         value={bodyAditionalInfoText}
         onChangeText={setBodyAditionalInfoText}
         onSubmitEditing={handleAddBody}

@@ -11,13 +11,13 @@ const styles = StyleSheet.create({
   },
   backArrow: {
     position: 'absolute',
-    top: 8,
+    top: 20,
     left: 20,
   },
-  eye: {
-    position: 'absolute',
-    top: 8,
-    right: 20,
+  header: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   questionContainer: {
     flex: 1,

@@ -101,14 +101,14 @@ const Create: React.FC = () => {
     }
   }
 
-  function handleAddAditionalInfo() {
-    if (!bodyAditionalInfoText) {
-      Alert.alert('ooops...', 'preencha o campo antes de adicionar!');
-    }
+  // function handleAddAditionalInfo() {
+  //   if (!bodyAditionalInfoText) {
+  //     Alert.alert('ooops...', 'preencha o campo antes de adicionar!');
+  //   }
 
-    setBodyAditionalInfo([...bodyAditionalInfo, bodyAditionalInfoText]);
-    setBodyAditionalInfoText('');
-  }
+  //   setBodyAditionalInfo([...bodyAditionalInfo, bodyAditionalInfoText]);
+  //   setBodyAditionalInfoText('');
+  // }
 
   async function handleFinish() {
     try {
@@ -185,68 +185,64 @@ const Create: React.FC = () => {
     );
   }
   return (
-    <View style={styles.container}>
-      <TouchableOpacity style={styles.backArrow} onPress={handleNavigateBack}>
-        <Feather name="arrow-left" size={24} color="#000" />
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.eye} onPress={handleNavigateToPreview}>
-        <Feather name="eye" size={24} color="#000" />
-      </TouchableOpacity>
+    <>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={handleNavigateBack}>
+            <Feather name="arrow-left" size={24} color="#000" />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleNavigateToPreview}>
+            <Feather name="eye" size={24} color="#000" />
+          </TouchableOpacity>
+        </View>
 
-      <KeyboardAwareScrollView
-        nestedScrollEnabled
-        style={styles.scrollContainer}
-        contentContainerStyle={{ flex: 1 }}
-      >
-        <View style={styles.headerAditional}>
-          <Text style={styles.headerAditionalText}>adicionar novo(a):</Text>
-          <View style={styles.pickerContainer}>
-            <Picker
-              style={styles.picker}
-              itemStyle={styles.pickerText}
-              onValueChange={(item: React.ReactText) => setType(item)}
-              selectedValue={type}
-            >
-              <Picker.Item label="Tópico" value="topic" />
-              <Picker.Item label="Parágrafo" value="paragraph" />
-            </Picker>
+        <KeyboardAwareScrollView
+          style={styles.scrollContainer}
+          contentContainerStyle={{ flex: 1 }}
+        >
+          <View style={styles.headerAditional}>
+            <Text style={styles.headerAditionalText}>adicionar novo(a):</Text>
+            <View style={styles.pickerContainer}>
+              <Picker
+                style={styles.picker}
+                itemStyle={styles.pickerText}
+                onValueChange={(item: React.ReactText) => setType(item)}
+                selectedValue={type}
+              >
+                <Picker.Item label="Tópico" value="topic" />
+                <Picker.Item label="Parágrafo" value="paragraph" />
+              </Picker>
+            </View>
           </View>
-        </View>
 
-        <View style={styles.mainAditionalContainer}>
-          {type === 'topic' && (
-            <Topic
-              bodyTitle={bodyTitle}
-              bodyAditionalInfoText={bodyAditionalInfoText}
-              bodyAditionalInfo={bodyAditionalInfo}
-              setBodyTitle={setBodyTitle}
-              setBodyAditionalInfoText={setBodyAditionalInfoText}
-              handleAddAditionalInfo={handleAddAditionalInfo}
-            />
-          )}
+          <View style={styles.mainAditionalContainer}>
+            {type === 'topic' && (
+              <Topic bodyTitle={bodyTitle} setBodyTitle={setBodyTitle} />
+            )}
 
-          {type === 'paragraph' && (
-            <Paragraph
-              bodyAditionalInfoText={bodyAditionalInfoText}
-              setBodyAditionalInfoText={setBodyAditionalInfoText}
-              handleAddBody={handleAddBody}
-            />
-          )}
-        </View>
-      </KeyboardAwareScrollView>
-      <View style={styles.footerAditional}>
-        <RectButton style={styles.addButton} onPress={handleAddBody}>
-          <Feather name="plus" size={24} color="#fff" />
-        </RectButton>
-        <View style={styles.finishButton}>
-          <Button
-            title="finalizar"
-            icon="chevron-right"
-            onPress={handleFinish}
-          />
-        </View>
+            {type === 'paragraph' && (
+              <Paragraph
+                bodyAditionalInfoText={bodyAditionalInfoText}
+                setBodyAditionalInfoText={setBodyAditionalInfoText}
+                handleAddBody={handleAddBody}
+              />
+            )}
+          </View>
+          <View style={styles.footerAditional}>
+            <RectButton style={styles.addButton} onPress={handleAddBody}>
+              <Feather name="plus" size={24} color="#fff" />
+            </RectButton>
+            <View style={styles.finishButton}>
+              <Button
+                title="finalizar"
+                icon="chevron-right"
+                onPress={handleFinish}
+              />
+            </View>
+          </View>
+        </KeyboardAwareScrollView>
       </View>
-    </View>
+    </>
   );
 };
 
