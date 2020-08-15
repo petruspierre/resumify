@@ -22,8 +22,8 @@
 
 ## Main technologies 
 
-- [React Native](https://reactnative.dev/) v37.0.1
-- [Expo](https://expo.io/) SDK 38
+- [React Native](https://reactnative.dev/) v0.62.2
+- [Expo](https://expo.io/) v38.0.0
 - [NodeJS](https://nodejs.org/en/) v12.18.0
 
 ## How to Use
