@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   },
   mainAditionalContainer: {
     flex: 1,
-    marginTop: 32,
+    marginTop: 16,
   },
   footerAditional: {
     flexDirection: 'row',

@@ -25,7 +25,11 @@ const Card: React.FC<CardProps> = ({ data }) => {
   return (
     <View style={styles.card}>
       <Text style={styles.type}>
-        {data.type === 'topic' ? 'tópico' : 'parágrafo'}
+        {data.type === 'topic'
+          ? 'tópico'
+          : data.type === 'subtitle'
+          ? 'subtítulo'
+          : 'parágrafo'}
       </Text>
       {data.type === 'topic' && <Text style={styles.title}>{data.title}</Text>}
       {data.content.map((value, index) => (

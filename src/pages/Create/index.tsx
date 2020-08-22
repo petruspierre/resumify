@@ -19,6 +19,7 @@ import api from '../../services/api';
 import Topic from '../../components/Topic';
 import Button from '../../components/Button';
 import Paragraph from '../../components/Paragraph';
+import Subtitle from '../../components/Subtitle';
 
 interface Body {
   type: string;
@@ -33,6 +34,7 @@ const Create: React.FC = () => {
   const [body, setBody] = useState<Body[]>([]);
   const [type, setType] = useState<React.ReactText>('paragraph');
   const [bodyTitle, setBodyTitle] = useState('');
+  const [bodySubtitle, setBodySubtitle] = useState('');
   const [bodyAditionalInfoText, setBodyAditionalInfoText] = useState('');
   const [bodyAditionalInfo, setBodyAditionalInfo] = useState<string[]>([]);
 
@@ -98,17 +100,24 @@ const Create: React.FC = () => {
       setBody([...body, data]);
       setBodyTitle('');
       setBodyAditionalInfoText('');
+    } else if (type === 'subtitle') {
+      if (!bodySubtitle) {
+        Alert.alert('ooops...', 'preencha o campo de subtítulo');
+        return;
+      }
+
+      const data = {
+        type: type as string,
+        title: '',
+        content: [bodySubtitle],
+      };
+
+      setBody([...body, data]);
+      setBodySubtitle('');
+      setBodyTitle('');
+      setBodyAditionalInfoText('');
     }
   }
-
-  // function handleAddAditionalInfo() {
-  //   if (!bodyAditionalInfoText) {
-  //     Alert.alert('ooops...', 'preencha o campo antes de adicionar!');
-  //   }
-
-  //   setBodyAditionalInfo([...bodyAditionalInfo, bodyAditionalInfoText]);
-  //   setBodyAditionalInfoText('');
-  // }
 
   async function handleFinish() {
     try {
@@ -125,6 +134,7 @@ const Create: React.FC = () => {
       setBody([]);
       setTitle('');
       setBodyTitle('');
+      setBodySubtitle('');
       setBodyAditionalInfoText('');
       navigation.navigate('Home');
 
@@ -209,8 +219,9 @@ const Create: React.FC = () => {
                 onValueChange={(item: React.ReactText) => setType(item)}
                 selectedValue={type}
               >
-                <Picker.Item label="Tópico" value="topic" />
                 <Picker.Item label="Parágrafo" value="paragraph" />
+                <Picker.Item label="Subtítulo" value="subtitle" />
+                <Picker.Item label="Tópico" value="topic" />
               </Picker>
             </View>
           </View>
@@ -218,6 +229,13 @@ const Create: React.FC = () => {
           <View style={styles.mainAditionalContainer}>
             {type === 'topic' && (
               <Topic bodyTitle={bodyTitle} setBodyTitle={setBodyTitle} />
+            )}
+
+            {type === 'subtitle' && (
+              <Subtitle
+                bodyTitle={bodySubtitle}
+                setBodyTitle={setBodySubtitle}
+              />
             )}
 
             {type === 'paragraph' && (
