@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:resumify/pages/Archive/archive.dart';
 import 'package:resumify/pages/Create/create.dart';
+import 'package:resumify/ui/widgets/button.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
+
+  _navigateToScreen(BuildContext context, StatelessWidget screen) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => screen.build(context)),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,37 +35,21 @@ class Home extends StatelessWidget {
             SizedBox(height: 96),
             Column(
               children: [
-                Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.symmetric(horizontal: 60),
-                  child: ElevatedButton.icon(
-                    icon: Icon(Icons.add),
-                    label: Text('criar novo resumo'),
+                Button(
+                    title: 'criar novo resumo',
+                    icon: Icons.add,
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Create()),
-                      );
-                    },
-                  ),
-                ),
+                      _navigateToScreen(context, Create());
+                    }),
                 SizedBox(
                   height: 4,
                 ),
-                Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.symmetric(horizontal: 60),
-                  child: ElevatedButton.icon(
-                    icon: Icon(Icons.inventory_2_outlined),
-                    label: Text('meus resumos'),
+                Button(
+                    title: 'meus resumos',
+                    icon: Icons.inventory_2_outlined,
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Archive()),
-                      );
-                    },
-                  ),
-                )
+                      _navigateToScreen(context, Archive());
+                    }),
               ],
             )
           ],
